@@ -45,7 +45,11 @@ file:
       path: ./uploads/avatars   #存储上传头像的目录
       max-size: 5242880  # 5MB
       allowed-extensions: jpg,jpeg,png,gif  # 允许上传的文件扩展名
-  video-upload:
+  video_upload:
       path: ./uploads/videos
       max-size: 524288000 # 500MB
       allowed-extensions: mp4,avi,mov,wmv,flv,mkv,webm
+  avatar_upload:
+      path: ./uploads/avatars   #存储上传头像的目录
+      max-size: 5242880  # 5MB
+      allowed-extensions: jpg,jpeg,png,gif  # 允许上传的文件扩展名
