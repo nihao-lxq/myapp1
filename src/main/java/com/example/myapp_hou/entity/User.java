@@ -41,7 +41,7 @@ public class User implements UserDetails {
     // 一对多关系：一个用户有多个视频
     /**
      * mappedBy: 这个关系已经在 Video 类的 user 字段中定义了，我这边只是引用它。
-     * cascade: 表示当你对“用户”做某些操作时，自动对他的视频也执行相同操作。
+     * cascade: 表示当你对"用户"做某些操作时，自动对他的视频也执行相同操作。
      * fetch.lazy: 表示：查用户时，不立刻查他的所有视频,只有当你调用 user.getVideos() 时，才去数据库查视频列表
      */
    // @JsonIgnore
@@ -49,6 +49,16 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Video> videos = new ArrayList<>();
 
+    // 论坛相关关系
+    // 一对多关系：一个用户可以发表多个帖子
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // 避免序列化时出现循环引用
+    private List<Post> posts = new ArrayList<>();
+
+    // 一对多关系：一个用户可以发表多个评论
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore // 避免序列化时出现循环引用
+    private List<Comment> comments = new ArrayList<>();
 
     //构造函数
     public  User(){}
